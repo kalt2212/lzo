@@ -69,6 +69,8 @@
 
 #define COPY_DICT(m_len,m_off) \
     assert(m_len >= 2); assert(m_off > 0); assert(op > out); \
+    if (m_off == 0) \
+        goto lookbehind_overrun; \
     if (m_off <= pd(op, out)) \
     { \
         const lzo_bytep m_pos = op - m_off; \
